@@ -1,8 +1,18 @@
 <template>
-  <div id="warp-box">
+  <v-app>
+    <NavBar></NavBar>
+    <v-main>
       <router-view></router-view>
-  </div>
+    </v-main>
+  </v-app>
 </template>
-<style>
 
-</style>
+<script>
+import NavBar from './components/NavBar.vue'
+
+export default {
+  components: {
+    NavBar
+  }
+}
+</script>
