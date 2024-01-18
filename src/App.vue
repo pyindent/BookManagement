@@ -1,17 +1,22 @@
 <template>
-  <div id="app">
-    <h1>Django VueJs Template</h1>
-    <div id="nav">
-     <router-link :to="{ name: 'home' }">Vue</router-link> |
-     <router-link :to="{ name: 'messages' }">Django Rest</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <img alt="Vue logo" src="./assets/logo.png">
+  <HelloWorld msg="Welcome to Your Vue.js App"/>
 </template>
+
+<script>
+import HelloWorld from './components/HelloWorld.vue'
+
+export default {
+  name: 'App',
+  components: {
+    HelloWorld
+  }
+}
+</script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
