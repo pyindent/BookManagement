@@ -3,7 +3,10 @@ import bookService from "@/api/service/book.service"
 // initial state
 // shape: [{ id, quantity }]
 const state = {
-  items: [],
+  data: {
+    items: [],
+    total: 0
+  },
   item: null
 }
 
@@ -19,10 +22,10 @@ const getters = {
 
 // actions
 const actions = {
-  getBooks({commit}){
-    return bookService.getBooks().then(res=>{
-      commit('setBooks', res.results)
-      Promise.resolve()
+  getBooks({commit}, payload){
+    return bookService.getBooks(payload).then(res=>{
+      commit('setBooks', res)
+      Promise.resolve(res)
     }).catch(error=>{
       Promise.reject(error)
     })
@@ -41,8 +44,9 @@ const actions = {
 
 // mutations
 const mutations = {
-  setBooks(state, books){
-    state.items = books
+  setBooks(state, data){
+    state.data.items = data.results
+    state.data.total = data.count
   },
   deleteBook(state, slug){
     state.items = state.items.filter(obj => obj.slug !== slug)

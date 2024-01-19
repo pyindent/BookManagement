@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card flat>
+    <v-card flat class="mx-auto" max-width="1200">
       <v-card-title class="d-flex align-center pe-2">
         <v-icon icon="mdi-file"></v-icon> &nbsp;
         Find a Book
@@ -13,7 +13,16 @@
       </v-card-title>
 
       <v-divider></v-divider>
-      <v-data-table v-model:search="search" :headers="headers" :items="books">
+      <v-data-table-server 
+        v-model:items-per-page="itemsPerPage"
+        :headers="headers"
+        :items-length="total"
+        :items="books"
+        :loading="loading"
+        :search="search"
+        item-value="name"
+        @update:options="onPageChange"
+      >
         <template v-slot:[`header.actions`]>
           <div class="text-end">Actions</div>
         </template>
@@ -30,7 +39,7 @@
             <v-img :src="`${item.image}`" height="64" cover></v-img>
           </v-card>
         </template>
-      </v-data-table>
+      </v-data-table-server>
     </v-card>
   </v-container>
 </template>
@@ -52,28 +61,30 @@ export default {
         { title: 'Description', sortable: false, key: 'desc' },
         { title: 'Action', value: "actions", sortable: false },
       ],
+      itemsPerPage: 10,
+      loading: true,
     }
   },
   computed: mapState({
-        books: state => state.books.items,
+    books: state => state.books.data.items,
+    total: state => state.books.data.total
   }),
   methods: {
-    ...mapActions('books', ['addBook', 'deleteBook', 'updateBook', 'getBook']),
+    ...mapActions('books', ['addBook', 'deleteBook', 'updateBook', 'getBooks']),
     viewItem(item) {
-      // Implement view item functionality here
       router.push(`/books/${item.slug}`)
     },
     editItem(item) {
-      // Implement edit item functionality here
       console.log(item)
     },
     deleteItem(item) {
-      // Implement delete item functionality here
       this.deleteBook(item.slug)
     },
-  },
-  created() {
-    this.$store.dispatch('books/getBooks')
+    onPageChange({page, itemsPerPage}) {
+      this.getBooks({ page: page, page_size: itemsPerPage }).then(() => {
+        this.loading = false
+      });
+    },
   }
 }
 </script>
@@ -83,6 +94,7 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
+
 .min-100 {
   min-width: 100px;
 }

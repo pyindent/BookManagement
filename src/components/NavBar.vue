@@ -20,6 +20,13 @@
         Sign Up
       </v-btn>
     </router-link>
+    
+    <router-link v-if="isAuth" to="/books">
+      <v-btn class="text-white">
+        My Books
+      </v-btn>
+    </router-link>
+
     <v-btn v-if="isAuth" @click="handleLogout">
       Logout
     </v-btn>

@@ -7,7 +7,7 @@ class Book(models.Model):
     image = models.ImageField(null=True, blank=True, max_length=200, upload_to="upload/imgs/books")
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=True)
     desc = models.TextField(default="")
-    slug = models.SlugField(unique=True, max_length=255, null=False, blank=False)
+    slug = models.SlugField(unique=True, max_length=255, null=False, blank=True)
 
     class Meta:
         app_label = 'books'
