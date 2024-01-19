@@ -52,38 +52,6 @@ export default {
         { title: 'Description', sortable: false, key: 'desc' },
         { title: 'Action', value: "actions", sortable: false },
       ],
-      items: [
-        {
-          title: 'Nebula GTX 3080',
-          image: '1.png',
-          desc: 'This is a book my book, your book.',
-        },
-        {
-          title: 'Nebula GTX 3080',
-          image: '1.png',
-          desc: 'This is a book my book, your book.',
-        },
-        {
-          title: 'Nebula GTX 3080',
-          image: '1.png',
-          desc: 'This is a book my book, your book.',
-        },
-        {
-          title: 'Nebula GTX 3080',
-          image: '1.png',
-          desc: 'This is a book my book, your book.',
-        },
-        {
-          title: 'Nebula GTX 3080',
-          image: '1.png',
-          desc: 'This is a book my book, your book.',
-        },
-        {
-          title: 'Nebula GTX 3080',
-          image: '1.png',
-          desc: 'This is a book my book, your book.ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
-        },
-      ],
     }
   },
   computed: mapState({

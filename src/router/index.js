@@ -3,6 +3,8 @@ import Home from '../views/Home'
 import SignIn from '../views/auth/SignIn'
 import SignUp from '../views/auth/SignUp'
 import BookList from '../views/book/BookList'
+import BookEdit from '../views/book/BookEdit'
+import BookDetail from '../views/book/BookDetail'
 
 const routes = [
   {
@@ -20,7 +22,18 @@ const routes = [
       {
         path:'/books',
         component: BookList
-      }
+      },
+      {
+        path:'/books/new',
+        component: BookEdit
+      },
+      {
+        path:'/books/:slug',
+        component: BookDetail
+      },{
+        path:'/books/:slug/edit',
+        component: BookEdit
+      },
     ]
   }
 ]
