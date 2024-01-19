@@ -2,7 +2,8 @@ import userService from "@/api/userService";
 import router from "@/router";
 import Cookies from "js-cookie";
 
-const user = JSON.parse(Cookies.get('user'));
+const userdata = Cookies.get('user')
+const user = userdata ? JSON.parse(userdata) : null
 
 const state = user ? {
     user: user.username,

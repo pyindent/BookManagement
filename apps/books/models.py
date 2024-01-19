@@ -9,6 +9,9 @@ class Book(models.Model):
     desc = models.TextField(default="")
     slug = models.SlugField(unique=True, max_length=255, null=False, blank=True)
 
+    class Meta:
+        app_label = 'books'
+    
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
