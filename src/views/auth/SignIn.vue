@@ -4,6 +4,9 @@
       <div class="text-h3 mx-auto pb-4">Sign In</div>
     </div>
     <v-card class="mx-auto px-6 py-8" max-width="400">
+      <div v-if="message?.detail" class="py-2">
+        <v-alert type="error"> {{ message?.detail }}</v-alert>
+      </div>
       <v-form v-model="form" @submit.prevent="onSubmit">
         <v-text-field v-model="name" :readonly="loading" :rules="[required]" class="mb-2" label="Username"></v-text-field>
 
@@ -15,9 +18,6 @@
           Sign In
         </v-btn>
       </v-form>
-      <div v-if="message?.detail" class="py-2">
-        <v-alert type="error"> {{ message?.detail }}</v-alert>
-      </div>
     </v-card>
   </v-container>
 </template>

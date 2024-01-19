@@ -25,12 +25,21 @@ const actions = {
             return Promise.reject(error)
         })
     },
+    logout({commit}) {
+        Cookies.remove('user')
+        commit('deleteUserData')
+        router.push('/')
+    }
 }
 
 const mutations = {
     saveUserData(state, {data}){
         state.user = data
         state.isAuth = true
+    },
+    deleteUserData(state){
+        state.user = null
+        state.isAuth = false
     },
     setError(state, {data}) {
         state.error = data
