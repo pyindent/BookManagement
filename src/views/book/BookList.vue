@@ -86,13 +86,14 @@ export default {
     }
   },
   computed: mapState({
-        books: state => state.books.items
+        books: state => state.books.items,
+        book: state => state.books.book
   }),
   methods: {
-    ...mapActions('books', ['addBook', 'deleteBook', 'updateBook']),
+    ...mapActions('books', ['addBook', 'deleteBook', 'updateBook', 'getBook']),
     viewItem(item) {
       // Implement view item functionality here
-      console.log(item)
+      this.getBook(item.slug)
     },
     editItem(item) {
       // Implement edit item functionality here

@@ -3,13 +3,17 @@ import bookService from "@/api/bookService"
 // initial state
 // shape: [{ id, quantity }]
 const state = {
-  books: [],
+  items: [],
+  item: null
 }
 
 // getters
 const getters = {
   books: state => {
-    return state.books
+    return state.items
+  },
+  book: state => {
+    return state.item
   }
 }
 
@@ -22,9 +26,15 @@ const actions = {
     }).catch(error=>{
       Promise.reject(error)
     })
-  },deleteBook({commit}, slug) {
-    return bookService.deleteBook(slug).then(()=>{
+  },
+  deleteBook({commit}, slug) {
+    return bookService.deleteBook(slug).then(() => {
       commit('deleteBook', slug)
+    })
+  },
+  getBook({commit}, slug) {
+    return bookService.getBook(slug).then((res) => {
+      commit('setBook', res)
     })
   }
 }
@@ -36,6 +46,9 @@ const mutations = {
   },
   deleteBook(state, slug){
     state.items = state.items.filter(obj => obj.slug !== slug)
+  },
+  setBook(state, book){
+    state.item = book
   }
 }
 

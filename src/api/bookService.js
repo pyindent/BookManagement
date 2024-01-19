@@ -6,7 +6,7 @@ export default {
               .then(response => response.data)
   },
   getBook(slug) {
-    return api.get(`books/`, slug)
+    return api.get(`books/${slug}/`, )
               .then(response => response.data)
   },
   deleteBook(slug) {
