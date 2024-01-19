@@ -8,19 +8,23 @@
       scroll-target="#scrolling-techniques-5"
       scroll-threshold="500"
     >
-      <v-app-bar-title>
-        <router-link to="/">Book Management App</router-link> 
+      <v-app-bar-title class="text-h5">
+        Book Management App
       </v-app-bar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn>
-        Sign In
-      </v-btn>
+      <router-link to="/signin">
+        <v-btn>
+          Sign In
+        </v-btn>
+      </router-link>
 
-      <v-btn>
-        Sign Up
-      </v-btn>
+      <router-link to="/signup">
+        <v-btn>
+          Sign Up
+        </v-btn>
+      </router-link>
 
     </v-app-bar>
 </template>
