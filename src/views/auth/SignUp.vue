@@ -8,12 +8,6 @@
         <v-text-field v-model="name" :readonly="loading" :rules="[required]" class="mb-2" 
           label="Username"></v-text-field>
 
-        <v-text-field v-model="first_name" :readonly="loading" :rules="[required]" class="mb-2" 
-          label="First Name"></v-text-field>
-
-        <v-text-field v-model="last_name" :readonly="loading" :rules="[required]" class="mb-2" 
-          label="Last Name"></v-text-field>
-
         <v-text-field v-model="email" :readonly="loading" :rules="[required]" class="mb-2" 
           label="Email"></v-text-field>
         
@@ -25,7 +19,7 @@
 
         <br>
         <v-btn :disabled="!form" :loading="loading" block color="success" size="large" type="submit" variant="elevated">
-          Sign In
+          Sign Up
         </v-btn>
       </v-form>
     </v-card>

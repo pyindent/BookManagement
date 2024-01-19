@@ -1,9 +1,11 @@
 <template>
   <v-app-bar absolute color="#43a047" dark shrink-on-scroll prominent scroll-target="#scrolling-techniques-5"
     scroll-threshold="500">
-    <v-app-bar-title class="text-h5">
-      Book Management App
-    </v-app-bar-title>
+    <router-link to="/" :style="{ textDecoration: 'none' }">
+      <v-app-bar-title class="text-h5 text-white">
+        Book Management App
+      </v-app-bar-title>
+    </router-link>
 
     <v-spacer></v-spacer>
 
