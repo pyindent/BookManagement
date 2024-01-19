@@ -27,6 +27,7 @@ class BooksListViewSet(ListModelMixin, RetrieveModelMixin, CreateModelMixin, Upd
     search_fields = ('title', 'desc')
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
+    lookup_field = 'slug'
 
     def get_queryset(self):
         # Filter books based on the current user (owner)

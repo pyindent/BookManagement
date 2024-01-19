@@ -8,13 +8,13 @@
     <v-spacer></v-spacer>
 
     <router-link v-if="!isAuth" to="/signin">
-      <v-btn>
+      <v-btn class="text-white">
         Sign In
       </v-btn>
     </router-link>
 
     <router-link v-if="!isAuth" to="/signup">
-      <v-btn>
+      <v-btn class="text-white">
         Sign Up
       </v-btn>
     </router-link>
