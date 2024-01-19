@@ -35,6 +35,7 @@
   </v-container>
 </template>
 <script>
+import router from '@/router'
 import { mapState, mapActions } from 'vuex'
 export default {
   data() {
@@ -87,13 +88,12 @@ export default {
   },
   computed: mapState({
         books: state => state.books.items,
-        book: state => state.books.book
   }),
   methods: {
     ...mapActions('books', ['addBook', 'deleteBook', 'updateBook', 'getBook']),
     viewItem(item) {
       // Implement view item functionality here
-      this.getBook(item.slug)
+      router.push(`/books/${item.slug}`)
     },
     editItem(item) {
       // Implement edit item functionality here

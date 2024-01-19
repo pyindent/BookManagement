@@ -1,6 +1,7 @@
-import userService from "@/api/userService";
+import userService from "@/api/service/user.service";
 import router from "@/router";
 import Cookies from "js-cookie";
+import TokenService from "@/api/token";
 
 const userdata = Cookies.get('user')
 const user = userdata ? JSON.parse(userdata) : null
@@ -17,7 +18,7 @@ const actions = {
     login({commit}, payload) {
         return userService.login(payload).then(res => {
             res.username = payload.username
-            Cookies.set('user', JSON.stringify(res))
+            TokenService.setUser(res)
             commit('saveUserData', payload.username)
             router.push('/books')
             return Promise.resolve(res)
@@ -26,7 +27,7 @@ const actions = {
         })
     },
     logout({commit}) {
-        Cookies.remove('user')
+        TokenService.removeUser()
         commit('deleteUserData')
         router.push('/')
     }

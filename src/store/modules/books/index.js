@@ -1,4 +1,4 @@
-import bookService from "@/api/bookService"
+import bookService from "@/api/service/book.service"
 
 // initial state
 // shape: [{ id, quantity }]
