@@ -14,6 +14,16 @@ const state = user ? {
     isAuth: false
  }
 
+ // getters
+const getters = {
+    book: state => {
+      return state.item
+    },
+    isAuthenticated: state => {
+        return state.isAuth
+    }
+  }
+
 const actions = {
     login({commit}, payload) {
         return userService.login(payload).then(res => {
@@ -49,6 +59,7 @@ const mutations = {
 
 export default {
     namespaced: true,
+    getters,
     state,
     actions,
     mutations

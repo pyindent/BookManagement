@@ -5,42 +5,40 @@ import SignUp from '../views/auth/SignUp'
 import BookList from '../views/book/BookList'
 import BookEdit from '../views/book/BookEdit'
 import BookDetail from '../views/book/BookDetail'
+import NotFound from '../views/error/NotFound'
+import store from '../store'
 
 const routes = [
+  { path: '/', component: Home },
+  { path: '/signin', component: SignIn, meta: { requiresAuth: false } },
+  { path: '/signup', component: SignUp, meta: { requiresAuth: false } },
   {
-    path: '/',
-    component: Home,
-  }, {
-    path: '/signin',
-    component: SignIn,
-  }, {
-    path: '/signup',
-    component: SignUp,
-  }, {
     path: '/books',
     children: [
-      {
-        path:'/books',
-        component: BookList
-      },
-      {
-        path:'/books/new',
-        component: BookEdit
-      },
-      {
-        path:'/books/:slug',
-        component: BookDetail
-      },{
-        path:'/books/:slug/edit',
-        component: BookEdit
-      },
+      { path: '', component: BookList, meta: { requiresAuth: true } },
+      { path: 'new', component: BookEdit, meta: { requiresAuth: true } },
+      { path: ':slug', component: BookDetail, meta: { requiresAuth: true } },
+      { path: ':slug/edit', component: BookEdit, meta: { requiresAuth: true } },
     ]
-  }
-]
+  },
+  { path: '/:catchAll(.*)', component: NotFound }
+];
 
 const router = createRouter({
   history: createWebHistory(),
   routes
-})
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = store.getters['user/isAuthenticated'];
+
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next('/signin');
+  } else if (isAuthenticated && (to.path === '/signin' || to.path === '/signup')) {
+    next('/');
+  } else {
+    next();
+  }
+});
+
+export default router;
