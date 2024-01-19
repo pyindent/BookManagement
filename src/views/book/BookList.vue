@@ -80,8 +80,8 @@ export default {
     deleteItem(item) {
       this.deleteBook(item.slug)
     },
-    onPageChange({page, itemsPerPage}) {
-      this.getBooks({ page: page, page_size: itemsPerPage }).then(() => {
+    onPageChange({search, page, itemsPerPage}) {
+      this.getBooks({ search:search, page: page, page_size: itemsPerPage }).then(() => {
         this.loading = false
       });
     },
