@@ -4,7 +4,7 @@ from django.utils.text import slugify
 
 class Book(models.Model):
     title = models.CharField(null=False, blank=False, max_length=100)
-    image = models.ImageField(max_length=200, upload_to="upload/imgs/books")
+    image = models.ImageField(null=True, blank=True, max_length=200, upload_to="upload/imgs/books")
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=True)
     desc = models.TextField(default="")
     slug = models.SlugField(unique=True, max_length=255, null=False, blank=True)

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import mixins
+from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, CreateModelMixin, UpdateModelMixin, DestroyModelMixin
 from rest_framework import viewsets
 from rest_framework import filters
 from rest_framework.response import Response
@@ -19,7 +19,7 @@ class BooksPagination(PageNumberPagination):
     max_page_size = 100
 
 
-class BooksListViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class BooksListViewSet(ListModelMixin, RetrieveModelMixin, CreateModelMixin, UpdateModelMixin, DestroyModelMixin, viewsets.GenericViewSet):
     pagination_class = BooksPagination
     queryset = Book.objects.all()
     serializer_class = BooksSerializer
@@ -32,10 +32,7 @@ class BooksListViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewset
         # Filter books based on the current user (owner)
         print(self.request.user)
         return Book.objects.filter(owner=self.request.user)
-
-    def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
-        instance.click_num += 1
-        instance.save()
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+    
+    def perform_create(self, serializer):
+        # Set the owner of the book to the current user during creation
+        serializer.save(owner=self.request.user)
