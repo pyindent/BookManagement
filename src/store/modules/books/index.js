@@ -49,7 +49,7 @@ const mutations = {
     state.data.total = data.count
   },
   deleteBook(state, slug){
-    state.items = state.items.filter(obj => obj.slug !== slug)
+    state.data.items = state.items || state.data.items.filter(obj => obj.slug !== slug)
   },
   setBook(state, book){
     state.item = book
