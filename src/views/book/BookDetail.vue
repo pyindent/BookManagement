@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container max-width="1200">
     <div v-if="book">
       <v-row>
         <v-col class="book-image" sm="6">

@@ -1,9 +1,9 @@
 <template>
-  <v-container>
+  <v-container max-width="1200">
     <div v-if="book.id" class="text-h5 mb-12">
       Edit Your Book
     </div>
-    <div v-else class="text-h5">
+    <div v-else class="text-h5 mb-12">
       Add a New Book
     </div>
     <v-form v-model="form" @submit.prevent="submitForm">
