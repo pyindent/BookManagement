@@ -1,19 +1,19 @@
 <template>
   <v-container>
     <div v-if="book">
-      <div class="w-full d-flex">
-        <div class="book-image mx-4">
+      <v-row>
+        <v-col class="book-image" sm="6">
           <v-img :src="`${book.image}`" height="auto" width="auto" cover></v-img>
-        </div>
-        <div class="mx-4">
+        </v-col>
+        <v-col sm="6">
           <div class="text-h4">
             {{ book.title }}
           </div>
           <div class="text-p mt-2">
             {{ book.desc }}
           </div>
-        </div>
-      </div>
+        </v-col>
+      </v-row>
       <div class="mt-2 mx-8 text-end">
         <v-btn class="mx-2" @click="editItem(book.slug)" color="indigo">Edit</v-btn>
         <v-btn class="mx-2" @click="deleteItem(book.slug)" color="red">Delete</v-btn>
@@ -52,7 +52,28 @@ export default {
 }
 </script>
 <style>
-.book-image {
-  max-width: 400px;
+@media (max-width: 600px) {
+ .book-image {
+    max-width: 100%;
+  }
+ .text-h4 {
+    font-size: 24px;
+  }
+ .text-p {
+    font-size: 16px;
+  }
 }
+
+@media (min-width: 601px) {
+ .book-image {
+    max-width: 400px;
+  }
+ .text-h4 {
+    font-size: 36px;
+  }
+ .text-p {
+    font-size: 20px;
+  }
+}
+
 </style>
