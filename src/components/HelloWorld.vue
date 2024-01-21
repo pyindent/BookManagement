@@ -4,7 +4,7 @@
       <img alt="Vue logo" class="mx-auto" src="../assets/logo.png">
     </div>
     <div class="text-h3 text-center py-2">
-      Welcome to the <br> Django + Vue.js Project
+      Welcome to the <br> Book Management App!
     </div>
   </v-container>
 </template>

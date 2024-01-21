@@ -9,20 +9,19 @@
 
         <v-text-field v-model="search" prepend-inner-icon="mdi-magnify" density="compact" label="Search" single-line flat
           hide-details variant="solo-filled"></v-text-field>
-        <v-btn class="mx-2" rounded="lg">New Book</v-btn>
+
+        <router-link to="/books/new">
+          <v-btn class="mx-2" rounded="lg" color="green">
+            <v-icon class="mr-1" size="18">mdi-plus</v-icon>
+            New Book
+          </v-btn>
+        </router-link>
+
       </v-card-title>
 
       <v-divider></v-divider>
-      <v-data-table-server 
-        v-model:items-per-page="itemsPerPage"
-        :headers="headers"
-        :items-length="total"
-        :items="books"
-        :loading="loading"
-        :search="search"
-        item-value="name"
-        @update:options="onPageChange"
-      >
+      <v-data-table-server v-model:items-per-page="itemsPerPage" :headers="headers" :items-length="total" :items="books"
+        :loading="loading" :search="search" item-value="name" @update:options="onPageChange">
         <template v-slot:[`header.actions`]>
           <div class="text-end">Actions</div>
         </template>
@@ -80,8 +79,8 @@ export default {
     deleteItem(item) {
       this.deleteBook(item.slug)
     },
-    onPageChange({search, page, itemsPerPage}) {
-      this.getBooks({ search:search, page: page, page_size: itemsPerPage }).then(() => {
+    onPageChange({ search, page, itemsPerPage }) {
+      this.getBooks({ search: search, page: page, page_size: itemsPerPage }).then(() => {
         this.loading = false
       });
     },
