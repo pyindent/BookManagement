@@ -8,24 +8,26 @@ const user = userdata ? JSON.parse(userdata) : null
 
 const state = user ? {
     user: user.username,
-    isAuth: true
- }: {
+    isAuth: true,
+    errors: null,
+} : {
     user: null,
-    isAuth: false
- }
+    isAuth: false,
+    errors: null,
+}
 
- // getters
+// getters
 const getters = {
-    book: state => {
-      return state.item
-    },
     isAuthenticated: state => {
         return state.isAuth
+    },
+    errors: state => {
+        return state.errors
     }
-  }
+}
 
 const actions = {
-    login({commit}, payload) {
+    login({ commit }, payload) {
         return userService.login(payload).then(res => {
             res.username = payload.username
             TokenService.setUser(res)
@@ -36,7 +38,18 @@ const actions = {
             return Promise.reject(error)
         })
     },
-    logout({commit}) {
+    signup({ commit }, payload) {
+        return userService.register(payload).then(res => {
+            commit('setErrors', null)
+            return Promise.resolve(res)
+        }).catch(error => {
+            if(error.response.data){
+                commit('setErrors', error.response.data)
+            }
+            return Promise.reject(error)
+        })
+    },
+    logout({ commit }) {
         TokenService.removeUser()
         commit('deleteUserData')
         router.push('/')
@@ -44,15 +57,18 @@ const actions = {
 }
 
 const mutations = {
-    saveUserData(state, {data}){
+    saveUserData(state, { data }) {
         state.user = data
         state.isAuth = true
     },
-    deleteUserData(state){
+    setErrors(state, errors) {
+        state.errors = errors;
+    },
+    deleteUserData(state) {
         state.user = null
         state.isAuth = false
     },
-    setError(state, {data}) {
+    setError(state, { data }) {
         state.error = data
     }
 }
