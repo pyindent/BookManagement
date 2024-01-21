@@ -1,10 +1,10 @@
 <template>
   <v-container>
-    <div v-if="book.id" class="text-h5">
-      Edit Book
+    <div v-if="book.id" class="text-h5 mb-12">
+      Edit Your Book
     </div>
     <div v-else class="text-h5">
-      New Book
+      Add a New Book
     </div>
     <v-form v-model="form" @submit.prevent="submitForm">
       <v-row>

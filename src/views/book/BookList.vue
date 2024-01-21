@@ -27,9 +27,9 @@
         </template>
         <template v-slot:[`item.actions`]="{ item }">
           <div class="text-end min-200">
-            <v-btn size="small" class="ma-1" color="green" @click="viewItem(item)" icon="mdi-eye"></v-btn>
-            <v-btn size="small" class="ma-1" color="indigo" @click="editItem(item)" icon="mdi-pencil"></v-btn>
-            <v-btn size="small" class="ma-1" color="red" @click="deleteItem(item)" icon="mdi-delete"></v-btn>
+            <IconBtn color="green" tooltip="View Book" icon="mdi-eye" :action="() => viewItem(item)"></IconBtn>
+            <IconBtn color="indigo" tooltip="Edit Book" icon="mdi-pencil" :action="() => editItem(item)"></IconBtn>
+            <IconBtn color="red" tooltip="Delete Book" icon="mdi-delete" :action="() => deleteItem(item)"></IconBtn>
           </div>
         </template>
 
@@ -45,7 +45,12 @@
 <script>
 import router from '@/router'
 import { mapState, mapActions } from 'vuex'
+import IconBtn from '@/components/Buttons/IconBtn'
+
 export default {
+  components: {
+    IconBtn
+  },
   data() {
     return {
       search: '',
