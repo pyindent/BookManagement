@@ -1,4 +1,5 @@
 import bookService from "@/api/service/book.service"
+import router from "@/router";
 
 // initial state
 // shape: [{ id, quantity }]
@@ -25,6 +26,24 @@ const actions = {
   getBooks({commit}, payload){
     return bookService.getBooks(payload).then(res=>{
       commit('setBooks', res)
+      Promise.resolve(res)
+    }).catch(error=>{
+      Promise.reject(error)
+    })
+  },
+  createBook({commit}, payload){
+    return bookService.createBook(payload).then(res=>{
+      router.push(`/books/${res.slug}`)
+      commit('setBook', res)
+      Promise.resolve(res)
+    }).catch(error=>{
+      Promise.reject(error)
+    })
+  },
+  editBook({commit}, payload){
+    return bookService.editBook(payload).then(res=>{
+      router.push(`/books/${res.slug}`)
+      commit('setBook', res)
       Promise.resolve(res)
     }).catch(error=>{
       Promise.reject(error)

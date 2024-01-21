@@ -74,7 +74,7 @@ export default {
       router.push(`/books/${item.slug}`)
     },
     editItem(item) {
-      console.log(item)
+      router.push(`/books/${item.slug}/edit`)
     },
     deleteItem(item) {
       this.deleteBook(item.slug)

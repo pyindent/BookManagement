@@ -1,13 +1,13 @@
 import api from '@/api/axios'
-import header from '../header'
+import { jsonHeader } from "@/api/header";
 
 export default {
   login(payload) {
-    return api.post(`auth/login/`, payload, { headers: header() })
+    return api.post(`auth/login/`, payload, { headers: jsonHeader() })
               .then(response => response.data)
   },
   register(payload) {
-    return api.post(`auth/register/`, payload, { headers: header() })
+    return api.post(`auth/register/`, payload, { headers: jsonHeader() })
               .then(response => response.data)
   },
 }

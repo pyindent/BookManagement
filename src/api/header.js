@@ -1,7 +1,13 @@
 import TokenService from './token'
 
-const header = () => {
+export const jsonHeader = () => {
   return {'Authorization':  `Bearer ${TokenService.getLocalAccessToken()}`}
 }
 
-export default header
+
+export const filewithHeader = () => {
+  return {
+    'Content-Type': 'multipart/form-data',
+    'Authorization':  `Bearer ${TokenService.getLocalAccessToken()}`,
+  }
+}
