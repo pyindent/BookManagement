@@ -1,30 +1,33 @@
 <template>
-  <v-container max-width="1200">
-    <div v-if="book.id" class="text-h5 mb-12">
-      Edit Your Book
-    </div>
-    <div v-else class="text-h5 mb-12">
-      Add a New Book
-    </div>
-    <v-form v-model="form" @submit.prevent="submitForm">
-      <v-row>
-        <v-col cols="12">
-          <v-text-field v-model="book.title" label="Title" :readonly="loading" :rules="[rules.required]"></v-text-field>
-        </v-col>
-        <v-col cols="12">
-          <v-textarea v-model="book.desc" label="Description" :readonly="loading" :rules="[rules.required]"></v-textarea>
-        </v-col>
-        <v-col cols="12">
-          <v-file-input label="Image" accept="image/*" @change="onFileChange"></v-file-input>
-          <v-img :src="book.image" :max-width="200" :max-height="200" v-if="book.image"></v-img>
-        </v-col>
-      </v-row>
-      <div class="w-full d-flex">
-        <v-btn type="submit" class="ms-auto" color="primary" :disabled="!form">
-          Save
-        </v-btn>
+  <v-container>
+    <v-card flat class="mx-auto" max-width="1200">
+      <div v-if="book.id" class="text-h5 mb-12">
+        Edit Your Book
       </div>
-    </v-form>
+      <div v-else class="text-h5 mb-12">
+        Add a New Book
+      </div>
+      <v-form v-model="form" @submit.prevent="submitForm">
+        <v-row>
+          <v-col cols="12">
+            <v-text-field v-model="book.title" label="Title" :readonly="loading" :rules="[rules.required]"></v-text-field>
+          </v-col>
+          <v-col cols="12">
+            <v-textarea v-model="book.desc" label="Description" :readonly="loading"
+              :rules="[rules.required]"></v-textarea>
+          </v-col>
+          <v-col cols="12">
+            <v-file-input label="Image" accept="image/*" @change="onFileChange"></v-file-input>
+            <v-img :src="book.image" :max-width="200" :max-height="200" v-if="book.image"></v-img>
+          </v-col>
+        </v-row>
+        <div class="w-full d-flex">
+          <v-btn type="submit" class="ms-auto" color="primary" :disabled="!form">
+            Save
+          </v-btn>
+        </div>
+      </v-form>
+    </v-card>
   </v-container>
 </template>
 
@@ -75,13 +78,13 @@ export default {
     },
     submitForm() {
       let formData = new FormData();
-      if(this.file){
+      if (this.file) {
         formData.append('image', this.file)
       }
       formData.append('title', this.book.title)
       formData.append('desc', this.book.desc)
       if (this.book.id) {
-        this.editBook({slug: this.book.slug, data: formData});
+        this.editBook({ slug: this.book.slug, data: formData });
       } else {
         this.createBook(formData);
       }
