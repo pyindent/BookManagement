@@ -34,9 +34,9 @@
         </template>
 
         <template v-slot:[`item.image`]="{ item }">
-          <v-card class="my-2 min-100" elevation="2" rounded>
-            <v-img :src="`${item.image}`" height="64" cover></v-img>
-          </v-card>
+          <div class="fixed-image-container p-2">
+            <img :src="`${item.image}`" alt="Item Image" class="fixed-image" />
+          </div>
         </template>
       </v-data-table-server>
     </v-card>
@@ -106,4 +106,17 @@ export default {
 .min-200 {
   min-width: 200px;
 }
-</style>
+
+.fixed-image-container {
+  width: 120px;
+  /* Set your desired width */
+  height: 120px;
+  /* Set your desired height */
+  overflow: hidden;
+}
+
+.fixed-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}</style>
