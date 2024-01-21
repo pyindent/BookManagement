@@ -15,7 +15,7 @@
           <v-textarea v-model="book.desc" label="Description" :readonly="loading" :rules="[rules.required]"></v-textarea>
         </v-col>
         <v-col cols="12">
-          <v-file-input v-model="file" label="Image" accept="image/*" @change="onFileChange"></v-file-input>
+          <v-file-input label="Image" accept="image/*" @change="onFileChange"></v-file-input>
           <v-img :src="book.image" :max-width="200" :max-height="200" v-if="book.image"></v-img>
         </v-col>
       </v-row>
