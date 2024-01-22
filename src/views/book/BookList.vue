@@ -29,7 +29,7 @@
           <div class="text-end min-200">
             <IconBtn color="green" tooltip="View Book" icon="mdi-eye" :action="() => viewItem(item)"></IconBtn>
             <IconBtn color="indigo" tooltip="Edit Book" icon="mdi-pencil" :action="() => editItem(item)"></IconBtn>
-            <IconBtn color="red" tooltip="Delete Book" icon="mdi-delete" :action="() => deleteItem(item)"></IconBtn>
+            <IconBtn color="red" tooltip="Delete Book" icon="mdi-delete" :action="() => deleteItemDialog(item)"></IconBtn>
           </div>
         </template>
 
@@ -40,16 +40,21 @@
         </template>
       </v-data-table-server>
     </v-card>
+    <ConfirmDialog @delete="deleteItem" ref="deleteDialog"
+      :description="deleteDescription" action="delete"></ConfirmDialog>
   </v-container>
 </template>
 <script>
 import router from '@/router'
 import { mapState, mapActions } from 'vuex'
 import IconBtn from '@/components/Buttons/IconBtn'
+import ConfirmDialog from '@/components/Dialogs/ConfirmDialog'
+
 
 export default {
   components: {
-    IconBtn
+    IconBtn,
+    ConfirmDialog
   },
   data() {
     return {
@@ -67,6 +72,7 @@ export default {
       ],
       itemsPerPage: 10,
       loading: true,
+      deleteDescription: '',
     }
   },
   computed: mapState({
@@ -81,7 +87,12 @@ export default {
     editItem(item) {
       router.push(`/books/${item.slug}/edit`)
     },
-    deleteItem(item) {
+    deleteItemDialog(item) {
+      // Set the description and call the openDialog method in the DeleteConfirmationDialog component
+      this.deleteDescription = "Do you really want to delete this book?";
+      this.$refs.deleteDialog.openDialog(item);
+    },
+    deleteItem(item){
       this.deleteBook(item.slug)
     },
     onPageChange({ search, page, itemsPerPage }) {
@@ -118,4 +129,5 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}</style>
+}
+</style>
