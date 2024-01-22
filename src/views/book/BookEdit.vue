@@ -46,7 +46,7 @@ export default {
       slug: '',
     },
     rules: {
-      required: value => !!value || 'Required.'
+      required: value => !!value || 'This field is required.'
     }
   }),
   computed: mapState({
