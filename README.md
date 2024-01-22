@@ -3,7 +3,8 @@
 ![Vue Logo](/src/assets/logo.png "Vue Logo")
 ![Django Logo](/src/assets/logo-django.png "Django Logo")
 
-Welcome to the documentation for the Django Vue Book Management App – a sleek example application integrating Vue.js and Django Rest Framework.
+Welcome to the documentation for the Django Vue Book Management App – an exemplary application that demonstrates the seamless integration of Vue.js and Django Rest Framework. This professionally crafted app is renowned for its sleek design and responsiveness, achieved through the implementation of Vuetify.
+
 
 ## Technologies Used
 
@@ -25,7 +26,8 @@ Welcome to the documentation for the Django Vue Book Management App – a sleek 
 Ensure you have the following installed on your system:
 
 - Python `v3.12.1`
-- Yarn `v1.22.21`
+- Node `v21.5.0`
+- NPM `v10.2.4`
 
 ## Project Structure
 
@@ -44,7 +46,7 @@ Ensure you have the following installed on your system:
 1. **Clone the Repository:**
    ```bash
    git clone git@github.com:elitesuper/bookmanagementapp.git
-   cd django-vue-template
+   cd bookmanagementapp
    ```
 2. **Backend Setup**
 - Create and activate a Python virtual environment:
@@ -69,6 +71,7 @@ Ensure you have the following installed on your system:
 - Install Vue packages and start the development server:
 
     ```bash
+    npm i -g yarn
     yarn add
     yarn serve
     ```
