@@ -17,7 +17,7 @@
         </v-row>
         <div class="mt-2 mx-8 text-end">
           <v-btn class="mx-2" @click="editItem(book.slug)" color="indigo">Edit</v-btn>
-          <v-btn class="mx-2" @click="deleteItem(book.slug)" color="red">Delete</v-btn>
+          <v-btn class="mx-2" @click="deleteItemDialog(book)" color="red">Delete</v-btn>
         </div>
       </div>
       <div v-else>
@@ -26,22 +26,39 @@
         </div>
       </div>
     </v-card>
+    <ConfirmDialog @delete="deleteItem" ref="deleteDialog" :description="deleteDescription" action="delete">
+    </ConfirmDialog>
   </v-container>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
+import ConfirmDialog from '@/components/Dialogs/ConfirmDialog'
+
 export default {
+  components: {
+    ConfirmDialog
+  },
+  data() {
+    return {
+      deleteDescription: '',
+    }
+  },
   computed: mapState({
     book: state => state.books.item
   }),
   methods: {
     ...mapActions('books', ['deleteBook', 'editBook']),
-    deleteItem(slug) {
-      this.deleteBook(slug).then(
+    deleteItem(book) {
+      this.deleteBook(book.slug).then(
         () => {
           this.$router.push('/books')
         }
       )
+    },
+    deleteItemDialog(item) {
+      // Set the description and call the openDialog method in the DeleteConfirmationDialog component
+      this.deleteDescription = "Do you really want to delete this book?";
+      this.$refs.deleteDialog.openDialog(item);
     },
     editItem(slug) {
       this.$router.push(`/books/${slug}/edit`)
@@ -80,4 +97,5 @@ export default {
   .text-p {
     font-size: 20px;
   }
-}</style>
+}
+</style>

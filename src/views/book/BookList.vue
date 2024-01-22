@@ -40,8 +40,8 @@
         </template>
       </v-data-table-server>
     </v-card>
-    <ConfirmDialog @delete="deleteItem" ref="deleteDialog"
-      :description="deleteDescription" action="delete"></ConfirmDialog>
+    <ConfirmDialog @delete="deleteItem" ref="deleteDialog" :description="deleteDescription" action="delete">
+    </ConfirmDialog>
   </v-container>
 </template>
 <script>
@@ -92,7 +92,7 @@ export default {
       this.deleteDescription = "Do you really want to delete this book?";
       this.$refs.deleteDialog.openDialog(item);
     },
-    deleteItem(item){
+    deleteItem(item) {
       this.deleteBook(item.slug)
     },
     onPageChange({ search, page, itemsPerPage }) {
