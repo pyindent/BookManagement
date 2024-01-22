@@ -108,6 +108,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:8080',
 ]

@@ -31,7 +31,7 @@
       Logout
     </v-btn>
 
-    <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon class="d-flex d-sm-none" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
   </v-app-bar>
   <v-navigation-drawer v-model="drawer" location="right" temporary>

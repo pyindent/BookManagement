@@ -1,19 +1,34 @@
+from django.contrib.auth import authenticate
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
+from rest_framework import exceptions
 from django.contrib.auth.password_validation import validate_password
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    username_field = User.USERNAME_FIELD
 
-    @classmethod
-    def get_token(cls, user):
-        token = super(CustomTokenObtainPairSerializer, cls).get_token(user)
+    def validate(self, attrs):
+        username_or_email = attrs.get('username')
+        password = attrs.get('password')
+        if '@' in username_or_email:
+            try:
+                user_obj = User.objects.get(email=username_or_email)
+                username_or_email = user_obj.username
+            except User.DoesNotExist:
+                raise exceptions.AuthenticationFailed('No user found with this email')
 
-        # Add custom claims
-        token['username'] = user.username
-        return token
+        user = authenticate(request=self.context.get('request'), username=username_or_email, password=password)
+        if user is None:
+            raise exceptions.AuthenticationFailed('No active account found with the given credentials')
+        
+        attrs['username'] = username_or_email
+        data = super().validate(attrs)
+        
+        data['username'] = user.username
 
+        return data
 
 class RegisterSerializer(serializers.ModelSerializer):
     
