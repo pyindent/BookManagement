@@ -1,4 +1,4 @@
-# Django Vue Book Management App Documentation ✌️ 🐍
+# Django Vue Book Management App Documentation
 
 ![Vue Logo](/src/assets/logo.png "Vue Logo")
 ![Django Logo](/src/assets/logo-django.png "Django Logo")
