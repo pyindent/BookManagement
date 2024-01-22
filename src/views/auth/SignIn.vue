@@ -8,11 +8,10 @@
         <v-alert type="error"> {{ message?.detail }}</v-alert>
       </div>
       <v-form v-model="form" @submit.prevent="onSubmit">
-        <v-text-field v-model="name" :readonly="loading" :rules="[required]" class="mb-2" label="Username"></v-text-field>
+        <v-text-field v-model="name" :readonly="loading" :rules="[required]" class="mb-2" label="Username or Email"></v-text-field>
 
         <v-text-field v-model="password" :readonly="loading" :rules="[required]" type="password" label="Password"
           placeholder="Enter your password"></v-text-field>
-
         <br>
         <v-btn :disabled="!form" :loading="loading" block color="success" size="large" type="submit" variant="elevated">
           Sign In
