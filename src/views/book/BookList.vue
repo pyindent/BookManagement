@@ -3,7 +3,7 @@
     <v-card flat class="mx-auto" max-width="1200">
       <v-card-title class="d-flex align-center pe-2">
         <v-icon icon="mdi-file"></v-icon> &nbsp;
-        Find a Book
+        <span class="d-none d-sm-block">Find a Book</span>
 
         <v-spacer></v-spacer>
 
@@ -13,7 +13,7 @@
         <router-link to="/books/new">
           <v-btn class="mx-2" rounded="lg" color="green">
             <v-icon class="mr-1" size="18">mdi-plus</v-icon>
-            New Book
+            <span class="d-none d-sm-block">New Book</span>
           </v-btn>
         </router-link>
 
@@ -34,7 +34,7 @@
         </template>
 
         <template v-slot:[`item.image`]="{ item }">
-          <div class="fixed-image-container p-2">
+          <div class="fixed-image-container">
             <img :src="`${item.image}`" alt="Item Image" class="fixed-image" />
           </div>
         </template>
@@ -108,10 +108,9 @@ export default {
 }
 
 .fixed-image-container {
-  width: 120px;
-  /* Set your desired width */
-  height: 120px;
-  /* Set your desired height */
+  padding: 4px;
+  width: 124px;
+  height: 124px;
   overflow: hidden;
 }
 
