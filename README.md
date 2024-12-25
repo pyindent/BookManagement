@@ -45,8 +45,8 @@ Ensure you have the following installed on your system:
 
 1. **Clone the Repository:**
    ```bash
-   git clone git@github.com:elitesuper/bookmanagementapp.git
-   cd bookmanagementapp
+   git clone git@github.com:pyindent/BookManagement.git
+   cd BookManagement
    ```
 2. **Backend Setup**
 - Create and activate a Python virtual environment:
